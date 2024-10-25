@@ -1,43 +1,38 @@
 # ConsoleApp1
 
-## Descripción
-ConsoleApp1 es una aplicación de consola en C# que captura video desde una cámara RTSP, muestra el video en una ventana y permite controlar la cámara mediante comandos PTZ (Pan-Tilt-Zoom) a través de solicitudes HTTP.
+## Description
+ConsoleApp1 is a C# console application that captures video from an RTSP camera, displays the video in a window, and allows you to control the camera using PTZ (Pan-Tilt-Zoom) commands via HTTP requests.
 
-## Requisitos
+## Requirements
 - **.NET Framework 4.7.2**
-- **Visual Studio** (versión recomendada: 2019 o superior)
+- **Visual Studio** (recommended version: 2019 or higher)
 
-## Dependencias
-- **OpenCvSharp**: Librería para procesamiento de imágenes y video.
-- **System.Net.Http**: Para realizar solicitudes HTTP.
+## Dependencies
+- **OpenCvSharp**: Library for image and video processing.
+- **System.Net.Http**: To make HTTP requests.
 
-## Instalación
+## Installation
 
-### 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/tu-repositorio.git cd tu-repositorio
+### 1. Clone the repository
+git clone https://github.com/your-user/your-repository.git cd your-repository
 
+### 2. Open the project in Visual Studio
+Open the `ConsoleApp1.sln` file in Visual Studio.
 
-### 2. Abrir el proyecto en Visual Studio
-Abre el archivo `ConsoleApp1.sln` en Visual Studio.
-
-### 3. Restaurar paquetes NuGet
-Visual Studio debería restaurar automáticamente los paquetes NuGet necesarios. Si no es así, puedes restaurarlos manualmente:
+### 3. Restore NuGet Packages
+Visual Studio should automatically restore the necessary NuGet packages. If not, you can restore them manually:
 nuget restore
 
+### 4. Configure RTSP URL and XML files
+Make sure to configure your camera's RTSP URL and the paths to the XML files for the PTZ commands in the `Program.cs` file:
 
-### 4. Configurar la URL RTSP y los archivos XML
-Asegúrate de configurar la URL RTSP de tu cámara y las rutas a los archivos XML para los comandos PTZ en el archivo `Program.cs`:
+## Usage
+Run the application from Visual Studio or from the command line: dotnet run
 
+### PTZ Commands
+- **'i'**: Move the camera up.
+- **','**: Move the camera down.
+- **'ESC'**: Quit the application.
 
-## Uso
-Ejecuta la aplicación desde Visual Studio o desde la línea de comandos: dotnet run
-
-### Comandos PTZ
-- **'i'**: Mover la cámara hacia arriba.
-- **','**: Mover la cámara hacia abajo.
-- **'ESC'**: Salir de la aplicación.
-
-## Contribuciones
-Las contribuciones son bienvenidas, sientete libre de compartir cualquier cambio. Por favor, abre un issue o un pull request para discutir cualquier cambio que te gustaría hacer.
-
-
+## Contributions
+Contributions are welcome, feel free to share any changes. Please open an issue or a pull request to discuss any changes you would like to make.
