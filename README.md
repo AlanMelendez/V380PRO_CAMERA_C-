@@ -14,7 +14,7 @@ ConsoleApp1 is a C# console application that captures video from an RTSP camera,
 ## Installation
 
 ### 1. Clone the repository
-git clone https://github.com/your-user/your-repository.git cd your-repository
+git clone [https://github.com/your-user/your-repository.git cd your-repository](https://github.com/AlanMelendez/V380PRO_CAMERA_CSHARP)
 
 ### 2. Open the project in Visual Studio
 Open the `ConsoleApp1.sln` file in Visual Studio.
