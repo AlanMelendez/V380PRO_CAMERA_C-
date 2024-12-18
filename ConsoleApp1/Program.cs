@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Program
+     class Program
     {
+        static string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "xml_commands");
+
         static async Task Main(string[] args)
         {
             await CaptureVideo(true);
@@ -15,7 +17,7 @@ namespace ConsoleApp1
 
         static async Task SendRequestAsync(string xmlFile)
         {
-            string url = "http://192.168.100.19:8899/onvif/ptz";
+            string url = "http://192.168.100.7:8899/onvif/ptz";
             using (HttpClient client = new HttpClient())
             {
                 string xmlContent = "";
@@ -25,7 +27,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine($"File not found: {xmlFile}");
+                    Console.WriteLine($"File not found: {xmlFile}, folderPath: {folderPath}");
                 }
 
                 var content = new StringContent(xmlContent, System.Text.Encoding.UTF8, "text/xml");
@@ -43,7 +45,7 @@ namespace ConsoleApp1
 
         static async Task CaptureVideo(bool saveToFile)
         {
-            string rtspUrl = "rtsp://192.168.100.19/live/ch00_1";
+            string rtspUrl = "rtsp://192.168.100.7/live/ch00_1";
             using (var capture = new VideoCapture(rtspUrl))
             {
                 if (!capture.IsOpened())
@@ -58,7 +60,9 @@ namespace ConsoleApp1
                 VideoWriter writer = null;
                 if (saveToFile)
                 {
-                    Size frameSize = new Size(capture.FrameWidth, capture.FrameHeight);
+                    //Size frameSize = new Size(capture.FrameWidth, capture.FrameHeight);
+                    Size frameSize = new Size(1280, 720);  // Resolución más baja
+
                     writer = new VideoWriter("video.avi", FourCC.XVID, 30, frameSize);
                 }
 
@@ -79,7 +83,7 @@ namespace ConsoleApp1
                     }
 
                     int key = Cv2.WaitKey(10);
-                    if (HandleKeyPress(key, ref isPtzCommandRunning)) break;
+                    if (HandleKeyPress(key, isPtzCommandRunning)) break;
                 }
 
                 writer?.Release();
@@ -87,15 +91,15 @@ namespace ConsoleApp1
             }
         }
 
-        static bool HandleKeyPress(int key, ref bool isPtzCommandRunning)
+        static bool HandleKeyPress(int key, bool isPtzCommandRunning)
         {
             if (key == 105 && !isPtzCommandRunning) // 'i' for PTZ up
             {
-                ExecutePtzCommandAsync(@"C:\path\to\postup.xml", isPtzCommandRunning);
+                ExecutePtzCommandAsync(folderPath + @"\postup.xml", isPtzCommandRunning);
             }
             else if (key == 44 && !isPtzCommandRunning) // ',' for PTZ down
             {
-                ExecutePtzCommandAsync(@"C:\path\to\postdown.xml", isPtzCommandRunning);
+                ExecutePtzCommandAsync(folderPath + @"\postdown.xml", isPtzCommandRunning);
             }
             else if (key == 27) // ESC to exit
             {
